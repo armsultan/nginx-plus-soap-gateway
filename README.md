@@ -67,6 +67,7 @@ A NGINX Plus base dockerfile and configuration for testing
 
     ```bash
     docker run -d -p 80:80 -p 443:443 -p 8080:8080 \
+      -v $PWD/etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
       -v $PWD/etc/nginx/conf.d:/etc/nginx/conf.d \
       -v $PWD/etc/nginx/includes:/etc/nginx/includes \
       -v $PWD/etc/nginx/nginx.conf:/etc/nginx/nginx.conf \

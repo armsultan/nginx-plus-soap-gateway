@@ -1,4 +1,4 @@
-function get_env(r) {
+function get_type(r) {
     r.subrequest('/env_endpoint')
     .then(reply => JSON.parse(reply.responseBody))
     .then(json => { 
@@ -8,4 +8,4 @@ function get_env(r) {
     .catch(e => r.return(500, e));
  }
 
-export default {get_env};
+export default {get_type};

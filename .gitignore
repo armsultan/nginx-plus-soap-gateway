@@ -1,0 +1,5 @@
+# Don't track these files
+nginx-repo.crt
+nginx-repo.key
+.DS_Store
+curl_tests.txt
