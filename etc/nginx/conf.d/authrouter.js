@@ -1,16 +1,16 @@
-function get_invalid(r) {
+// function get_invalid(r) {
 
-    var regex = /wsse:InvalidField/;
-    var body = r.requestBody;
-    var invalid = regex.test(body);
+//     var regex = /wsse:InvalidField/;
+//     var body = r.requestBody;
+//     var invalid = regex.test(body);
 
-    if (invalid) {
-        return "0";
-    }
-    else {
-        return "1";
-    }
-}
+//     if (invalid) {
+//         return "0";
+//     }
+//     else {
+//         return "1";
+//     }
+// }
 
 function get_username(r) {
     var body = r.requestBody;

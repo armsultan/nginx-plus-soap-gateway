@@ -66,24 +66,21 @@ A NGINX Plus base dockerfile and configuration for testing
     **To mount local volume:**
 
     ```bash
-    # NGINX Plus Additional NGINX Metrics
-    log_format  main_ext  '$remote_addr - $remote_user [$time_local] "$request" '
-                      '$status $body_bytes_sent "$http_referer" "$http2" '
-                      '"$http_user_agent" "$http_x_forwarded_for" '
-                      '"$host" sn="$server_name" '
-                      'rt=$request_time '
-                      'ua="$upstream_addr" us="$upstream_status" '
-                      'ut="$upstream_response_time" ul="$upstream_response_length" '
-                      'cs=$upstream_cache_status $request_id' ;
+      docker run -d -p 80:80 -p 443:443 -p 8080:8080 \
+      -v $PWD/etc/nginx/conf.d:/etc/nginx/conf.d \
+      -v $PWD/etc/nginx/includes:/etc/nginx/includes \
+      -v $PWD/etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
+      -v $PWD/etc/nginx/api_soap_errors.conf:/etc/nginx/api_soap_errors.conf \
+      nginx-plus
     ```
 
- 4. To run commands in the docker container you first need to start a bash session inside the nginx container
+ 1. To run commands in the docker container you first need to start a bash session inside the nginx container
     ```bash
     docker ps # get Docker IDs of running containers
     sudo docker exec -i -t [CONTAINER ID] /bin/sh
     ```
 
- 5. To open logs
+ 2. To open logs
     ```bash
     docker ps # get Docker IDs of running containers
     sudo docker logs -f [CONTAINER ID]
