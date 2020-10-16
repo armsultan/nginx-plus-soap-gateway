@@ -2,13 +2,13 @@ function get_invalid(r) {
 
     var regex = /wsse:InvalidField/;
     var body = r.requestBody;
-    // return regex.test(body);
+    var invalid = regex.test(body);
 
-    if (regex.test(body)) {
-        return "1";
+    if (invalid) {
+        return "0";
     }
     else {
-        return "0";
+        return "1";
     }
 }
 
