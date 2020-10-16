@@ -1,16 +1,16 @@
-// function get_invalid(r) {
+function get_invalid(r) {
 
-//     var regex = /wsse:InvalidField/;
-//     var body = r.requestBody;
-//     var invalid = regex.test(body);
+    var regex = /wsse:InvalidField/;
+    var body = r.requestBody;
+    // return regex.test(body);
 
-//     if (invalid) {
-//         return "0";
-//     }
-//     else {
-//         return "1";
-//     }
-// }
+    if (regex.test(body)){
+        return "true";
+    }
+    else {
+        return "false";
+    }
+}
 
 function get_username(r) {
     var body = r.requestBody;
@@ -27,12 +27,22 @@ function get_password(r) {
 
 function get_type(r) {
 
+    // if (get_username(r) =="" ||get_password(r) =="") {
+
+    if (r.variables.invalid == "true") {
+        r.error("HERE I AM");
+
+        r.headersOut['type'] = "error";
+        r.return(200);
+    }
+
     r.subrequest('/env_endpoint', JSON.stringify({ created: "2020-08-12T17:46:35.942Z", nonce: 1, origin: "localhost", password: r.variables.password, requestedMethod: "", requestedUri: "", username: r.variables.username }))
         .then(reply => {
             r.error(reply.responseBody);
             var json = JSON.parse(reply.responseBody);
             r.error(json.type);
             r.headersOut['type'] = json.type;
+            
             r.return(200);
         })
         .catch(e => {
