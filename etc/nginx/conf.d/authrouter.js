@@ -27,14 +27,15 @@ function get_password(r) {
 
 function get_type(r) {
 
-    // if (get_username(r) =="" ||get_password(r) =="") {
-
+    // This does not fire off because a subrequest made does not pass
+    // the body
     if (r.variables.invalid == "true") {
         r.error("HERE I AM");
 
         r.headersOut['type'] = "error";
         r.return(200);
     }
+    // End redundant invalid check
 
     r.subrequest('/env_endpoint', JSON.stringify({ created: "2020-08-12T17:46:35.942Z", nonce: 1, origin: "localhost", password: r.variables.password, requestedMethod: "", requestedUri: "", username: r.variables.username }))
         .then(reply => {
