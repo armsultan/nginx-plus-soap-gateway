@@ -9,11 +9,12 @@ A NGINX Plus base dockerfile and configuration for testing
 ├── etc/
 │    ├── nginx/
 │    │    ├── conf.d/ # ADD your HTTP/S configurations here
-│    │    │   ├── vinrouter.conf......HTTP Virtual Server configuration
-│    │    │   ├── dummy_vin_servers_json.conf...Dummy loopback web servers responds with application/json
+│    │    │   ├── api_gateway_soap.conf.........HTTP Virtual Server configuration
+│    │    │   ├── dummy_auth_servers_json.conf..Dummy loopback web servers responds with application/json
 │    │    │   ├── dummy_servers.conf............Dummy Upstream configurations: PRODUCTION, ENTERTAINMENT and "X"
 │    │    │   ├── health_checks.conf............Custom health check definitions
-│    │    │   └── status_api.conf...........NGINX Plus Live Activity Monitoring available on port 8080 - [Source](https://gist.github.com/nginx-gists/│a51 341a11ff1cf4e94ac359b67f1c4ae)
+│    │    │   └── status_api.conf...............NGINX Plus Live Activity Monitoring available on port 8080 - [Source](https://gist.github.com/nginx-gists/│a51 341a11ff1cf4e94ac359b67f1c4ae)
+│    │    │   └── upstreams.conf................Upstream configurations for our loopback web servers acting as API endpoints responds with application/json
 │    │    ├── includes
 │    │    │    ├── add_headers
 │    │    │    │   └── security.conf_ ....................Recommended response headers for security

@@ -1,16 +1,13 @@
+
+// **Start redundant**
+// get_invalid() function is not used because we are parsing the request body in
+// NGINX itself using regex on the $request_body varible
 function get_invalid(r) {
 
     var regex = /wsse:InvalidField/;
     var body = r.requestBody;
-    // return regex.test(body);
-
-    if (regex.test(body)){
-        return "true";
-    }
-    else {
-        return "false";
-    }
 }
+// **End redundant**
 
 function get_username(r) {
     var body = r.requestBody;
@@ -27,6 +24,7 @@ function get_password(r) {
 
 function get_type(r) {
 
+    // **Start redundant**
     // This does not fire off because a subrequest made does not pass
     // the body
     if (r.variables.invalid == "true") {
@@ -35,7 +33,7 @@ function get_type(r) {
         r.headersOut['type'] = "error";
         r.return(200);
     }
-    // End redundant invalid check
+    // **End redundant**
 
     r.subrequest('/env_endpoint', JSON.stringify({ created: "2020-08-12T17:46:35.942Z", nonce: 1, origin: "localhost", password: r.variables.password, requestedMethod: "", requestedUri: "", username: r.variables.username }))
         .then(reply => {
@@ -43,7 +41,7 @@ function get_type(r) {
             var json = JSON.parse(reply.responseBody);
             r.error(json.type);
             r.headersOut['type'] = json.type;
-            
+
             r.return(200);
         })
         .catch(e => {

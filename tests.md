@@ -74,6 +74,6 @@ curl -X POST -H "Content-Type: text/xml" \
 ```
 curl -X POST -H "Content-Type: text/xml" \
     -H 'SOAPAction: "http://localhost"' \
-    --data-binary @ivalid_request.xml \
+    --data-binary @valid_request.xml \
     http://localhost
 ```
